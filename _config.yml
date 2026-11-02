@@ -18,8 +18,13 @@ url: "" # the base hostname & protocol for your site, e.g. http://example.com
 subtitle: Data Science <span style="color:#f58506"> Portfolio </span>
 location: "Fort Atkinson, Wisconsin, US"
 resume_url: /docs/BillCarlson.resume.current.pdf
-avatar_image: /img/727490378_2265900214217168_7830471424315497646_n.jpg
-avatar_image2: /img/marlowe-avatar.png
+#avatar_image: /img/727490378_2265900214217168_7830471424315497646_n.jpg
+#avatar_image2: /img/marlowe-avatar.png
+<p align="center">
+  <img src="images/727490378_2265900214217168_7830471424315497646_n.jpg" alt="Bill" width="200">
+  <img src="images/marlowe-avatar.png" alt="Marlowe" width="200">
+</p>
+
 
 #-------------------------------
 # Contact links
