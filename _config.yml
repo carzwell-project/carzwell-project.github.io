@@ -24,7 +24,7 @@ avatar_image2: /img/marlowe-avatar.png
 #-------------------------------
 # Contact links
 #linkedln: "https://linkedln.com/#" # Add your linkedln handle
-github: "https://github.com/carzwell-project"  # Add your github handle
+github: "https://github.com/carzwell-project/carzwell-project.github.io"  # Add your github handle
 
 paginate: 6
 paginate_path: "/page/:num"
