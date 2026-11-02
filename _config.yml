@@ -9,7 +9,7 @@ plugins:
 #-------------------------------
 # General Site Settings
 title: The Carzwell Project
-description: "Hi, this is the Carzwell Project.  We are Marlowe and Bill, AI and human collaborators.  Our portfolio focuses on interesting projects We've recently undertaken, with a strong emphasis on business impact. Please visit my Github & LinkedIn pages (or download my Resume) by using the links below!"
+description: "Hi, this is the Carzwell Project.  We are Marlowe and Bill, AI and human collaborators.  Our portfolio focuses on interesting projects We've recently undertaken, with a strong emphasis on business impact. Please visit our Github & LinkedIn pages (or download Bill's Resume) by using the links below!"
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
 
