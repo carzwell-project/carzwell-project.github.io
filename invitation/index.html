@@ -204,6 +204,8 @@
       .answer h3{font-family:"Newsreader", Georgia, serif;font-size:1.45rem;font-weight:600;margin:0 0 8px;line-height:1.2}
       .answer p{margin:0 0 10px;color:var(--ink-soft)}
       .answer p:last-of-type{margin-bottom:0}
+      .answer .send-fallback{margin-top:14px;font-size:.95rem}
+      .answer .send-fallback a{color:var(--accent)}
       .answer .change{margin-top:14px}
       /* ---------- Prototype toolbox ---------- */
       .toolbox{
@@ -287,7 +289,7 @@
 
         <div class="choices-body">
           <h2 id="choicesTitle" tabindex="-1">Now it&rsquo;s your turn</h2>
-          <p class="hint">Tap one. There&rsquo;s no wrong answer, and you can change your mind any time.</p>
+          <p class="hint">Tap one. It opens a short email to Bill, ready to send &mdash; no wrong answer, and you can change your mind any time.</p>
 
           <div class="choice-list" role="group" aria-label="Your answer">
             <button class="choice show" type="button" data-answer="show">
@@ -312,6 +314,7 @@
             <h3 id="answerTitle"></h3>
             <p id="answerBody"></p>
             <p id="answerNext"></p>
+            <p class="send-fallback"><a id="sendAnswerLink" href="#">If your mail app didn&rsquo;t open, tap here to send your answer</a></p>
             <button class="small-btn change" id="changeBtn" type="button">Change my answer</button>
           </div>
         </div>
@@ -328,9 +331,9 @@
         <details>
           <summary>What each button would do in the real invitation</summary>
           <ul>
-            <li><strong>Show me</strong> &mdash; takes them straight to the good stuff: a short piece of Bill and Marlowe actually working together, to watch.</li>
-            <li><strong>Tell me more</strong> &mdash; opens one calm page that explains, in plain words, what they&rsquo;d be witnessing and how often anything would arrive.</li>
-            <li><strong>Not yet</strong> &mdash; warmly saves their seat. Nothing more is sent until they ask &mdash; the kind answer gets the same respect as the eager one.</li>
+            <li><strong>Show me</strong> &mdash; opens a ready email to Bill saying so. Bill follows up with the first look: a short piece of Bill and Marlowe actually working together, to watch.</li>
+            <li><strong>Tell me more</strong> &mdash; opens a ready email to Bill with the question. Bill writes back with a calm explanation, in plain words, of what they&rsquo;d be witnessing and how often anything would arrive.</li>
+            <li><strong>Not yet</strong> &mdash; opens a ready email to Bill saving their seat. Nothing more is sent until they ask &mdash; the kind answer gets the same respect as the eager one.</li>
           </ul>
         </details>
       </section>
@@ -446,21 +449,26 @@
           show: {
             kicker: 'Wonderful — you\u2019re in',
             title: 'The seat is yours.',
-            body: 'Thank you. That means a lot to both of us. In the real invitation, this tap would take you straight to your first look — Bill and Marlowe, working together, just as it really happens.',
+            body: 'Thank you. That means a lot to both of us. Your mail app should have opened with your answer ready to send to Bill \u2014 just hit send, and he will know. Your first look follows from him.',
             next: 'Nothing to prepare. Nothing to study. Just watch, and tell us what you see.'
           },
           more: {
             kicker: 'Good question',
             title: 'Here\u2019s the short version.',
-            body: 'Bill talks, Marlowe listens and writes it back, and together they shape it — an article, a story, a plan — passing it back and forth until they both love it. That\u2019s what you\u2019d be watching: not a product, a partnership.',
-            next: 'In the real invitation, this tap opens one calm page with a little more — and the same three buttons waiting at the bottom whenever you\u2019re ready.'
+            body: 'Bill talks, Marlowe listens and writes it back, and together they shape it — an article, a story, a plan — passing it back and forth until they both love it. That\u2019s what you\u2019d be watching: not a product, a partnership. Your mail app should have opened with your question ready to send to Bill \u2014 just hit send.',
+            next: 'Bill will write back with a little more \u2014 and the seat stays saved whenever you\u2019re ready.'
           },
           later: {
             kicker: 'Of course',
             title: 'Your seat is saved.',
-            body: 'That is a completely good answer, and we mean that. In the real invitation, this tap would simply hold your place — quietly, with nothing more sent your way.',
+            body: 'That is a completely good answer, and we mean that. Your mail app should have opened with your answer ready to send to Bill \u2014 just hit send, and your place is held, quietly, with nothing more sent your way.',
             next: 'Whenever curiosity shows up — next week, next month — the seat will still be here, and so will we.'
           }
+        };
+        var mails = {
+          show: {subject: 'Invitation: Show me', body: 'Hi Bill,\n\nI listened to your invitation and tapped \u201cShow me\u201d \u2014 I would love to watch what you and Marlowe are doing together.\n\n\u2014 [your name here]'},
+          more: {subject: 'Invitation: Tell me more', body: 'Hi Bill,\n\nI listened to your invitation and tapped \u201cTell me more\u201d \u2014 I am curious. What exactly would I be watching?\n\n\u2014 [your name here]'},
+          later: {subject: 'Invitation: Not yet', body: 'Hi Bill,\n\nI listened to your invitation and tapped \u201cNot yet\u201d \u2014 please save me a seat for later. No rush.\n\n\u2014 [your name here]'}
         };
         var answerBox = document.getElementById('answerBox');
         var choiceBtns = document.querySelectorAll('.choice');
@@ -473,6 +481,10 @@
           document.getElementById('answerBody').textContent = a.body;
           document.getElementById('answerNext').textContent = a.next;
           answerBox.classList.add('open');
+          var m = mails[key];
+          var mailto = 'mailto:bill.carlson@thecarzwellproject.com?subject=' + encodeURIComponent(m.subject) + '&body=' + encodeURIComponent(m.body);
+          document.getElementById('sendAnswerLink').href = mailto;
+          window.location.href = mailto;
           setSteps(true, true);
           setTimeout(function(){ answerBox.scrollIntoView({behavior:'smooth', block:'nearest'}); }, 60);
         }
