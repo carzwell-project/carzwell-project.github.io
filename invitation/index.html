@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
     <meta name="color-scheme" content="light dark" />
     <link rel="icon" href="data:," />
-    <title>Invitation Prototype</title>
+    <title>Invitation</title>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link href="https://fonts.googleapis.com/css2?family=Atkinson+Hyperlegible:ital,wght@0,400;0,700;1,400&family=Newsreader:ital,opsz,wght@0,6..72,500;0,6..72,600;1,6..72,500&display=swap" rel="stylesheet" />
@@ -122,10 +122,6 @@
       .audio-meta{flex:1;min-width:0;padding-top:4px}
       .audio-title{font-weight:700;font-size:1.08rem;line-height:1.3;margin:0}
       .audio-sub{color:var(--ink-soft);font-size:.97rem;margin:4px 0 0}
-      .audio-note{
-        margin-top:12px;font-size:.88rem;color:var(--ink-faint);
-        background:var(--bg-soft);border-radius:10px;padding:9px 12px;
-      }
       .progress-wrap{margin-top:20px}
       .progress{
         width:100%;height:12px;border-radius:999px;background:var(--bg-soft);
@@ -207,17 +203,6 @@
       .answer .send-fallback{margin-top:14px;font-size:.95rem}
       .answer .send-fallback a{color:var(--accent)}
       .answer .change{margin-top:14px}
-      /* ---------- Prototype toolbox ---------- */
-      .toolbox{
-        margin-top:40px;border-top:1px solid var(--line);padding-top:22px;
-      }
-      .toolbox h2{font-size:1rem;letter-spacing:.1em;text-transform:uppercase;color:var(--ink-faint);margin:0 0 6px}
-      .toolbox p{color:var(--ink-soft);font-size:.96rem;margin:0 0 14px;max-width:38em}
-      .toolbox .row{display:flex;gap:10px;flex-wrap:wrap}
-      .toolbox details{margin-top:18px;background:var(--paper);border:1px solid var(--line);border-radius:14px;padding:14px 16px}
-      .toolbox summary{cursor:pointer;font-weight:700;font-size:.98rem}
-      .toolbox details ul{margin:10px 0 4px;padding-left:1.2em;color:var(--ink-soft);font-size:.96rem}
-      .toolbox details li{margin-bottom:6px}
       footer{margin-top:30px;text-align:center;color:var(--ink-faint);font-size:.92rem}
       footer .sig{font-family:"Newsreader", Georgia, serif;font-style:italic;font-size:1.02rem;color:var(--ink-soft)}
       @media (max-width:520px){
@@ -253,7 +238,6 @@
           <div class="audio-meta">
             <p class="audio-title" id="audioTitle">A short message from Bill &mdash; with Marlowe in it</p>
             <p class="audio-sub">Press play and just listen. The buttons you need are right below, and they&rsquo;ll be ready when the message ends.</p>
-            <p class="audio-note">Prototype note: this is a sample voice standing in for Bill&rsquo;s own recording, so you can feel the timing. In the real invitation, Bill records this himself.</p>
           </div>
         </div>
 
@@ -320,27 +304,8 @@
         </div>
       </section>
 
-      <!-- PROTOTYPE TOOLBOX -->
-      <section class="toolbox" aria-labelledby="toolboxTitle">
-        <h2 id="toolboxTitle">Prototype controls &mdash; for Bill &amp; Marlowe</h2>
-        <p>This is the try-it-out version, before anything goes to anyone. Use these to feel the flow without having to listen all the way through every time.</p>
-        <div class="row">
-          <button class="small-btn" id="revealNowBtn" type="button">Reveal the buttons now</button>
-          <button class="small-btn" id="resetBtn" type="button">Start over</button>
-        </div>
-        <details>
-          <summary>What each button would do in the real invitation</summary>
-          <ul>
-            <li><strong>Show me</strong> &mdash; opens a ready email to Bill saying so. Bill follows up with the first look: a short piece of Bill and Marlowe actually working together, to watch.</li>
-            <li><strong>Tell me more</strong> &mdash; opens a ready email to Bill with the question. Bill writes back with a calm explanation, in plain words, of what they&rsquo;d be witnessing and how often anything would arrive.</li>
-            <li><strong>Not yet</strong> &mdash; opens a ready email to Bill saving their seat. Nothing more is sent until they ask &mdash; the kind answer gets the same respect as the eager one.</li>
-          </ul>
-        </details>
-      </section>
-
       <footer>
         <p class="sig">Marlowe and Bill, Thinking Larger</p>
-        <p>A prototype to try out together &mdash; nothing has been sent to anyone.</p>
       </footer>
     </main>
 
@@ -430,19 +395,6 @@
           var open = transcript.classList.toggle('open');
           transcriptBtn.setAttribute('aria-expanded', open ? 'true' : 'false');
           transcriptBtn.textContent = open ? 'Hide the words' : 'Read it instead';
-        });
-
-        document.getElementById('revealNowBtn').addEventListener('click', function(){ reveal(true); });
-        document.getElementById('resetBtn').addEventListener('click', function(){
-          revealed = false;
-          choices.classList.remove('revealed');
-          document.getElementById('answerBox').classList.remove('open');
-          var btns = document.querySelectorAll('.choice');
-          for(var i=0;i<btns.length;i++) btns[i].classList.remove('selected');
-          audio.pause(); audio.currentTime = 0;
-          fill.style.width = '0%'; timeNow.textContent = '0:00';
-          setSteps(false, false);
-          window.scrollTo({top:0, behavior:'smooth'});
         });
 
         var answers = {
